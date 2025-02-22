@@ -32,13 +32,12 @@ export default function RecentProduct() {
     );
     console.log(data.data)
     setproducts(data.data);
-    setloding(false);
+    setloading(false);
   }
 
   useEffect(() => {
     getProducts();
-  });
-
+  }, []); 
 // نلغي بقا  الطريقه الي فوق  دي 
 //  احنا  بقا  عايزن  الداتا الي  من   الابي   اي دي  مش  كل  ما ارجع  للصفحه  يشغل  الفانكشن ويلود وترجع  عايو=زاها  تفضل  موجوده  بلاش  رخامه 
 
