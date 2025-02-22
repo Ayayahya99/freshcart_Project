@@ -12,7 +12,7 @@ import style from "./RecentProduct.module.css";
 import { CartContext } from "../../../context/CartContext";
 import { WishListContext } from "../../../context/WishListContext";
 import { useQuery } from "@tanstack/react-query";
-import UseProducts from "../../../Hooks/UseProducts";
+// import UseProducts from "../../../Hooks/UseProducts";
 export default function RecentProduct() {
   let { addProductToCart } = useContext(CartContext);
   let { addItemToWishList,wishlistIds ,removeWishListItem } = useContext(WishListContext);
@@ -26,18 +26,18 @@ export default function RecentProduct() {
  
 
 
-  // async function getProducts() {
-  //   let { data } = await axios.get(
-  //     `https://ecommerce.routemisr.com/api/v1/products`
-  //   );
-  //   console.log(data.data)
-  //   setproducts(data.data);
-  //   setloding(false);
-  // }
+  async function getProducts() {
+    let { data } = await axios.get(
+      `https://ecommerce.routemisr.com/api/v1/products`
+    );
+    console.log(data.data)
+    setproducts(data.data);
+    setloding(false);
+  }
 
-  // useEffect(() => {
-  //   getProducts();
-  // });
+  useEffect(() => {
+    getProducts();
+  });
 
 // نلغي بقا  الطريقه الي فوق  دي 
 //  احنا  بقا  عايزن  الداتا الي  من   الابي   اي دي  مش  كل  ما ارجع  للصفحه  يشغل  الفانكشن ويلود وترجع  عايو=زاها  تفضل  موجوده  بلاش  رخامه 
@@ -59,7 +59,7 @@ export default function RecentProduct() {
 
 
 //طب والاحلى من كل  ده اننا  نحط الكلام ده كله  فهوك  عشان اعرف استخدمه  فاكت ر من كومبونانت   واستخدمه  كده 
-let { data, isLoading} =UseProducts()
+// let { data, isLoading} =UseProducts()
 
  
 
@@ -75,11 +75,11 @@ let { data, isLoading} =UseProducts()
     <>
 
 
-      {isLoading?
+      {loading ?
         <Looding />
        : (
         <div className="flex flex-wrap py-8 gap-y-4 justify-center">
-          {data?.data.data.map((product, index) => (
+          {products.map((product, index) => (
             <div className="w-1/5">
               {/*  */}
               <div className="product p-2 rounded-lg">
