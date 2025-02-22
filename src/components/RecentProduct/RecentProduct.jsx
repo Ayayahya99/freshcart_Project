@@ -12,7 +12,7 @@ import style from "./RecentProduct.module.css";
 import { CartContext } from "../../../context/CartContext";
 import { WishListContext } from "../../../context/WishListContext";
 import { useQuery } from "@tanstack/react-query";
-import useProducts from "../../../Hooks/UseProducts";
+import UseProducts from "../../../Hooks/UseProducts";
 export default function RecentProduct() {
   let { addProductToCart } = useContext(CartContext);
   let { addItemToWishList,wishlistIds ,removeWishListItem } = useContext(WishListContext);
@@ -59,7 +59,7 @@ export default function RecentProduct() {
 
 
 //طب والاحلى من كل  ده اننا  نحط الكلام ده كله  فهوك  عشان اعرف استخدمه  فاكت ر من كومبونانت   واستخدمه  كده 
-let { data, isLoading} =useProducts()
+let { data, isLoading} =UseProducts()
 
  
 
