@@ -5,7 +5,8 @@ import Looding from "../Looding/Looding";
 import { CartContext } from "../../../context/CartContext";
 import { WishListContext } from "../../../context/WishListContext";
 import { useQuery } from "@tanstack/react-query";
-import UseProducts from "../../../Hooks/UseProducts";
+
+// import UseProducts from "../../../Hooks/UseProducts";
 export default function Products() {
   let { addProductToCart } = useContext(CartContext);
   let { addItemToWishList, wishlistIds, removeWishListItem } =
@@ -15,22 +16,22 @@ export default function Products() {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState(""); // احنا  هنحفظ السيرش  هنا  
 
-  // async function getProducts() {
-  //   try {
-  //     let { data } = await axios.get(
-  //       `https://ecommerce.routemisr.com/api/v1/products`
-  //     );
-  //     setProducts(data.data);
-  //     setLoading(false);
-  //     console.log(data.data);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
+  async function getProducts() {
+    try {
+      let { data } = await axios.get(
+        `https://ecommerce.routemisr.com/api/v1/products`
+      );
+      setProducts(data.data);
+      setLoading(false);
+      console.log(data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
-  // useEffect(() => {
-  //   getProducts();
-  // }, []);
+  useEffect(() => {
+    getProducts();
+  }, []);
 
 
 
@@ -53,7 +54,7 @@ export default function Products() {
 
 
 //طب والاحلى من كل  ده اننا  نحط الكلام ده كله  فهوك  عشان اعرف استخدمه  فاكت ر من كومبونانت   واستخدمه  كده 
-let { data, isLoading} =UseProducts()
+// let { data, isLoading} =UseProducts()
 
 
 
@@ -67,7 +68,7 @@ let { data, isLoading} =UseProducts()
   }
 
   // ونجيب البروداكتس  الي   اتسيفت عندي  وامش ي عليها  بفلتر    لو البروداكت ال ي هو بيعدي   عليه   بنفس  الاسم   احفظه الفاليو دي  الي  اسمها   فلتر  بروداكت 
-  const filteredProducts = data?.data.data.filter((product) =>
+  const filteredProducts = products.filter((product) =>
     product.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -83,7 +84,7 @@ let { data, isLoading} =UseProducts()
         />
       </div>
 
-      {isLoading ? (
+      {loading ? (
         <Looding />
       ) : (
         // بعد كده نعرض  الداتا  بعد ما  فلترتها    وبس  كده سهله   اهي  
