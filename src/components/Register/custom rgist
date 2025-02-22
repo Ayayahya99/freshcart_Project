@@ -1,0 +1,230 @@
+import React from "react";
+// import style from "./Register.module.css";
+
+import {useFormik} from 'formik'
+import values from './../../../node_modules/lodash-es/values';
+export default function Register() {
+
+// دي  الفانكشن الي  هتاخد الداتا لما  اعمل  سبميت  وتبعتها  للباك  اند  
+
+function Register(values){  //الفاليوز دي الي  هتستقبل  الداتا  بتاعتب الي جايه من  الفورميك
+console.log(values)
+}
+
+
+
+// الفانكشن  دي  فكرتها من الاول ان ف ي اوبكت او اراي  اسمه ايرور  بيرجع لو ما فيهوش ولا ايرور  الراجل ده زي  الفل  لو في  فالراجل  ده  باعت  حاجات  غلط ما  تخليهوش  يعدي  
+
+function validateform(values){    //دي  مع كل  انبوت  هدخله   هيعمله  فاليدت 
+    // الفاليوز  بتتبعت  عنا فالبامتر  الي فوق 
+    // نمسكهم واحد واحد  بقا  ونشوفهم  هتعدي  ولا لا 
+
+     let errors={}
+          
+        if (!values.name) {
+          errors.name = 'name requiered'   //كده  انا  بحط اوبجيكت  جوه  الوبجيكت ايل  اسمه  ايرور  وتحت  بستدعيه 
+          
+        }
+        else if(!/^[A-Z]\w{3,15}$/.test(values.name)) {
+          errors.name = "name invalid ex (Aya)"
+        }
+
+
+        if (!values.phone) {
+          errors.phone = 'phone is required'
+          }
+          else if (!/^01[0125] [0-9]{8}$/.test(values.phone))
+          {
+          errors.phone= 'we need egyptian phone num'
+          }
+
+      
+     return errors
+     
+
+
+
+
+} 
+
+const formik =  useFormik({
+  initialValues:{
+      name:'',
+      email :'',
+      password:'',
+      rePassword:'',
+      phone:'' ,
+  },onSubmit: Register   //لما يحصل   سبميت   شغل الريجيستر  فانكشن  الي   هتبعت الداتا  للباك اند وهوو من  نفسه باي  ديفولت  بياخد الداتا الفاليوز ال ي اليوزر  دخلها  ويبعتها  للفانكشتن   
+   ,validate:validateform    // ياخد الداتا  ويبعتها للفالديت  فانكشن 
+})
+
+
+
+
+  return (
+    <>
+      <section className="bg-gray-50">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+          <div className="w-full bg-white rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0">
+            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+                Create an account
+              </h1>
+
+              {/*  بصي  احنا  عايزين  نفهم الفورم  ان  لما نعمل  سابميت  تحط الدات  وتبعتخا للباك اند */}
+              {/*  في  فانكشن  اسمها   اون  سابميت  دي   بتاخد الاوبجيكت  فورميك الي  في  كذا حاجه  منها  الهاندل سبمت  */}
+              <form
+                onSubmit={formik.handleSubmit}
+                className="space-y-9 md:space-y-6"
+                action="#"
+              >
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Your Name
+                  </label>
+                  <input
+                    // هنا  انا  بقوله  ابعت الداتا دي  للفورميك الي  هو فوق
+                    value={formik.values.name}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    type="text"
+                    name="name"
+                    id="name"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                    placeholder="Enter your name"
+                    required
+                  />
+                </div>
+                  {/* error */}
+                  {/* تاتش  عشان لما  اليوزر  يجي ناحيه الايرور  ويكتبه غلط يطلع الايررو  بتاعه  */}
+                {formik.errors.name && formik.touched.name &&(                  //بصي  دي  شرط لو  في  ايرور  طلع الدفايه  الحلوه  دي  
+                  <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"role="alert">
+                    {formik.errors.name}
+                  </div>
+                  
+                )}
+
+
+
+
+
+
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Your email
+                  </label>
+                  <input
+                    value={formik.values.mail}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    type="email"
+                    name="email"
+                    id="email"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                    placeholder="name@company.com"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="password"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Password
+                  </label>
+                  <input
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="••••••••"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="rePassword"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Confirm password
+                  </label>
+                  <input
+                    value={formik.values.rePassword}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    type="password"
+                    name="rePassword"
+                    id="rePassword"
+                    placeholder="••••••••"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                    required
+                  />
+                </div>
+
+
+
+                <div>
+                  <label
+                    htmlFor="phone"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Your phone
+                  </label>
+                  <input
+                    value={formik.values.phone}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    type="number"
+                    name="phone"
+                    id="phone"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                    placeholder="Enter phone number"
+                    required
+                  />
+                </div>
+                {/* error */}
+                {formik.errors.phone&& formik.touched.phone &&  (                  //بصي  دي  شرط لو  في  ايرور  طلع الدفايه  الحلوه  دي  
+                  <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"role="alert">
+                    {formik.errors.phone}
+                  </div>
+                )}
+                
+
+
+
+
+
+
+                <button
+                  type="submit"
+                  className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                >
+                  Create an account
+                </button>
+                <p className="text-sm font-light text-gray-500">
+                  Already have an account?{" "}
+                  <a
+                    href="#"
+                    className="font-medium text-primary-600 hover:underline"
+                  >
+                    Login here
+                  </a>
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
