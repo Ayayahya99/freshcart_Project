@@ -12,6 +12,8 @@ import style from "./RecentProduct.module.css";
 import { CartContext } from "../../../context/CartContext";
 import { WishListContext } from "../../../context/WishListContext";
 import { useQuery } from "@tanstack/react-query";
+import { DarkModeContext } from "../../../context/DarkModeContext";
+
 // import UseProducts from "../../../Hooks/UseProducts";
 export default function RecentProduct() {
   let { addProductToCart } = useContext(CartContext);
@@ -20,6 +22,7 @@ export default function RecentProduct() {
   const [products, setproducts] = useState([]);
   const [loading, setloading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const { darkMode } = useContext(DarkModeContext);
 
  
 
@@ -77,8 +80,9 @@ export default function RecentProduct() {
       {loading ?
         <Looding />
        : (
-        <div className="flex flex-wrap py-8 gap-y-4 justify-center">
-          {products.map((product, index) => (
+        <div className={`flex flex-wrap py-8 gap-4 justify-center transition-all duration-300 
+          ${darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"}`}>
+       {products.map((product, index) => (
             <div className="w-1/5">
               {/*  */}
               <div className="product p-2 rounded-lg">

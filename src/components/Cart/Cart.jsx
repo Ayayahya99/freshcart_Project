@@ -3,12 +3,14 @@ import style from "./Cart.module.css";
 import Looding from "../Looding/Looding";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { CartContext } from "../../../context/CartContext";
-
+import { DarkModeContext } from "../../../context/DarkModeContext";
 export default function Cart() {
   let { cart, addToCount, removeCartItem, removeAllCartItem, getProductsCart ,numOfCartItems} =
     useContext(CartContext);
   let navigate = useNavigate();
   const [loading, setLoading] = useState(true); // حالة اللودينج
+    const { darkMode } = useContext(DarkModeContext);
+  
 
   // **جلب بيانات السلة عند فتح الصفحة**
   useEffect(() => {
@@ -27,11 +29,11 @@ export default function Cart() {
   // **عرض رسالة "السلة فارغة" إذا لم تكن هناك منتجات**
   if (!cart?.data?.products || cart.data.products.length === 0) {
     return (
-      <div className="text-center py-10">
-        <h2 className="text-2xl font-semibold text-gray-700">
-          Your cart is empty!
-        </h2>
-      </div>
+      <div className={`flex justify-center items-center min-h-screen ${darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"} p-4`}>
+      <h2 className="text-2xl font-semibold">
+        Your cart is empty!
+      </h2>
+    </div>
     );
   }
 

@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 import {useFormik} from 'formik'
 import values from './../../../node_modules/lodash-es/values';
 import { UserContext } from "../../../context/UserContext";
-
+import { DarkModeContext } from "../../../context/DarkModeContext";
 
 import  * as Yup from "yup"
 import axios from 'axios';
@@ -22,7 +22,7 @@ export default function Login() {
 
 
 // دي  الفانكشن الي  هتاخد الداتا لما  اعمل  سبميت  وتبعتها  للباك  اند  
-
+  const { darkMode } = useContext(DarkModeContext);
      const [ApiError , setApiError] = useState(null)
      const [looding , setlooding] = useState(false)
      let{setUserToken,ForgetPassword} =useContext(UserContext)
@@ -92,11 +92,13 @@ async function handleForgetPassword() {
 
   return (
     <>
-      <section className="bg-gray-50">
+   
+     
+      <section >
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-full bg-white rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0">
-            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+            <div className={`p-6 space-y-4 md:space-y-6 sm:p-8 ${darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"} p-4`}>
+              <h1 className={`text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ${darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"} p-4`}   >
                 Create an account
               </h1>
 

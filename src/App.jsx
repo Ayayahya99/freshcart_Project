@@ -26,6 +26,10 @@ import BrandsDetailes from './components/BrandsDetailes/BrandsDetailes';
 import ResetPassword from './components/ResetPassword/ResetPassword';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { Provider } from "react-redux";
+
+import {store} from "./redux/store"; 
+import { DarkModeProvider } from '../context/DarkModeContext.jsx';
 const routers = createBrowserRouter([
   {
     // بصي  الاي  اوت  هو الكوبونانت  ال ي هيترن  فيه  كل   الاطفال  الي  تحته  
@@ -64,6 +68,7 @@ const routers = createBrowserRouter([
 // npm i @tanstack/react-query
 
 const query = new QueryClient   // كده  كل  الحاجات والمكتبات  الي فال كويري  كلاينت  هتتخزن  فكويري 
+  
 
 function App() {
   
@@ -71,32 +76,39 @@ function App() {
   
   return <> 
   
-  {/* كده كل  الابلكيشن  كومبونانت  ولاد  اليزر كونتيكست الي  عملناه  */}
-  {/* بصي  يقا الاب  قولنا بنعمل  فيه داتا  وابعتها  لاطفال  اليوزر  كونتيكست  */}
- <QueryClientProvider client={query}>   {/* كده  بمد الابلكيشن   بالمكتبات دي  زي الروتينج كده   فانا  كده اي  حد فالابلكيشن   يعرف  يستخدم المكتبات  دي   */}
+  <DarkModeProvider   >
 
- <WishListProvider>
-  <Toaster/>  
-  <CartContextProvider>
-      
-    <UserContextProvider> 
-     <ReactQueryDevtools/>
-     <RouterProvider router={routers}>
-   
-
-     </RouterProvider>
- 
-    </UserContextProvider> 
-    </CartContextProvider>
-
-  </WishListProvider>
-
- </QueryClientProvider>
- 
- 
- 
-    
-  
+  <Provider store={store}>
+          
+          {/* كده كل  الابلكيشن  كومبونانت  ولاد  اليزر كونتيكست الي  عملناه  */}
+         {/* بصي  يقا الاب  قولنا بنعمل  فيه داتا  وابعتها  لاطفال  اليوزر  كونتيكست  */}
+         <QueryClientProvider client={query}>   {/* كده  بمد الابلكيشن   بالمكتبات دي  زي الروتينج كده   فانا  كده اي  حد فالابلكيشن   يعرف  يستخدم المكتبات  دي   */}
+       
+       <WishListProvider>
+        <Toaster/>  
+        <CartContextProvider>
+            
+          <UserContextProvider> 
+           <ReactQueryDevtools/>
+           <RouterProvider router={routers}>
+         
+       
+           </RouterProvider>
+       
+          </UserContextProvider> 
+          </CartContextProvider>
+       
+        </WishListProvider>
+       
+       </QueryClientProvider>
+       
+          
+       
+       
+       
+         </Provider>
+        
+  </DarkModeProvider>
  
   
   

@@ -77,82 +77,67 @@ initialValues:{
 
 
 
-  return (
-    <>
-      <h1>ChickOut</h1>
+return (
+  <div className="flex justify-center items-center min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 max-w-md w-full">
+      <h2 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-4">
+        Checkout
+      </h2>
 
-      <form className="max-w-sm mx-auto" onSubmit={formik.handleSubmit}>
-  {/* Details Input */}
-  <div className="mb-5">
-    <label htmlFor="details" className="block mb-2 text-sm font-medium text-gray-900">Details</label>
-    <input 
-      type="text" 
-      name="details"
-      value={formik.values.details}
-      onChange={formik.handleChange}
-      onBlur={formik.handleBlur}
-      className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-      required 
-    />
-    {formik.touched.details && formik.errors.details ? (
-      <p className="text-red-500 text-xs">{formik.errors.details}</p>
-    ) : null}
+      <form onSubmit={formik.handleSubmit} className="space-y-4">
+        {/* Details Input */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-white">Details</label>
+          <input
+            type="text"
+            name="details"
+            value={formik.values.details}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            className="w-full p-2 border rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
+            required
+          />
+        </div>
+
+        {/* Phone Input */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-white">Phone</label>
+          <input
+            type="tel"
+            name="phone"
+            value={formik.values.phone}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            className="w-full p-2 border rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
+            required
+          />
+        </div>
+
+        {/* City Input */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-white">City</label>
+          <input
+            type="text"
+            name="city"
+            value={formik.values.city}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            className="w-full p-2 border rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
+            required
+          />
+        </div>
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="w-full bg-main text-white font-medium rounded-lg py-2.5 hover:bg-green-700 transition duration-300"
+          disabled={looding}
+        >
+          {looding ? <i className="fas fa-spinner fa-spin"></i> : "Pay Now"}
+        </button>
+      </form>
+    </div>
   </div>
+);
 
-  {/* Phone Input */}
-  <div className="mb-5">
-    <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900">Phone</label>
-    <input 
-      type="tel" 
-      name="phone"
-      value={formik.values.phone}
-      onChange={formik.handleChange}
-      onBlur={formik.handleBlur}
-      className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-      required 
-    />
-    {formik.touched.phone && formik.errors.phone ? (
-      <p className="text-red-500 text-xs">{formik.errors.phone}</p>
-    ) : null}
-  </div>
-
-  {/* City Input */}
-  <div className="mb-5">
-    <label htmlFor="city" className="block mb-2 text-sm font-medium text-gray-900">City</label>
-    <input 
-      type="text" 
-      name="city"
-      value={formik.values.city}
-      onChange={formik.handleChange}
-      onBlur={formik.handleBlur}
-      className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-      required 
-    />
-    {formik.touched.city && formik.errors.city ? (
-      <p className="text-red-500 text-xs">{formik.errors.city}</p>
-    ) : null}
-  </div>
-
-  {/* Submit Button */}
-  {looding ? (
-    <button type="button" className="w-full text-white bg-main font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-      <i className="fas fa-spinner fa-spin"></i>
-    </button>
-  ) : (
-    <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-      Pay Now
-    </button>
-  )}
-</form>
-
-
-
-
-
-
-
-
-
-    </>
-  );
 }

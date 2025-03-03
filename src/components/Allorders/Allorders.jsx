@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,useContext } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-
+import { DarkModeContext } from "../../../context/DarkModeContext";
 export default function Allorders() {
   const [orders, setOrders] = useState([]); // هنخزن الوردرات  هنا  
 
   const token = localStorage.getItem("userToken"); // بعد كده  نجيب  لتوكن  من اللوكل  ستريج
   const decodedJWTToken = jwtDecode(token); // بعد كده  نستخدم  توكن  لجيب  الايدي
   const userID = decodedJWTToken.id; //user id 
-
+  const { darkMode } = useContext(DarkModeContext);
   async function getUserOrders(userID) {
     try {
       let { data } = await axios.get(
@@ -31,9 +31,10 @@ export default function Allorders() {
   
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+     <div className={`text-4xl font-semibold${darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"} p-4`}>
+    
         🛒 Your Orders
-      </h1>
+      </div>
 
       {orders.length === 0 ? (
         <p className="text-gray-500 text-center">No orders found.</p>
@@ -42,7 +43,8 @@ export default function Allorders() {
           {orders.map((order) => (
             <div
               key={order._id}
-              className="bg-white shadow-lg rounded-xl p-6 border border-gray-200 transition-transform transform hover:scale-[1.02] duration-300"
+             
+              className={`shadow-lg rounded-xl p-6 border border-gray-200 transition-transform transform hover:scale-[1.02] duration-300 ${darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"} p-4`}
             >
               {/* ✅ Order Header */}
               <div className="mb-4 flex justify-between items-center">
