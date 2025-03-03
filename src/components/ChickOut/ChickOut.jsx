@@ -35,7 +35,7 @@ export default function ChickOut() {
 
    try {
       setlooding(true)
-      let {data} = await axios.post(`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cart.cartId}?url=http://localhost:5173`, 
+      let {data} = await axios.post(`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cart.cartId}?url=https://freshcart-project-ucm2.vercel.app/`, 
       {shappindAddress},
       {headers:{token:localStorage.getItem("userToken")}})
 
