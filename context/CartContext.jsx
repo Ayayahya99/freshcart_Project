@@ -8,7 +8,7 @@ import Toaster from "react-hot-toast";
 export let CartContext = createContext();
 
 // عشان بقاي  الابلكيشن  ياخدو من  الكونتكست  ده  بعملهم الكومبونانت  ده
-// الكومبونانت  ده ان  شاء  الله  هيجيله اطفال   فنديله الاطفال
+// الكومبونانت  ده ان  شاء  الله  هيجيله اطفال   فنديله الاطفالذ
 export default function CartContextProvider({ children }) {
   
   // let navigate =useNavigate()
@@ -17,7 +17,14 @@ export default function CartContextProvider({ children }) {
     token: localStorage.getItem("userToken"),
   };
   const [numOfCartItems, setNumOfCartItems] = useState(0);
+  const [token, setToken] = useState(localStorage.getItem("UserToken"));
 
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("UserToken");
+    setToken(storedToken);  })
+
+ 
   async function addProductToCart(productId) {
     try {
       let { data } = await axios.post(
@@ -128,17 +135,13 @@ export default function CartContextProvider({ children }) {
 
 
 
-
+   
 
 
 
   // اول  ما  حد  يفتح الفانكشن دي  هترن والي  هي  بتجيب  الداتا من  الكارت   وتبعتها  للسيت  كارت   ال ي فيها محتويات الكارت   اي حد  فالابلكيشن  بقا  احتاجها  هي  محفوظه  ما طارتش  
 
-  // useEffect(() => {
-  //   getProductsCart()
-  // })
-
-
+ 
   // والاطفال  دول انا  هديهم داتا الي  هي  الفاليوز  دي
   //  يعين  كده  انا ببعت الدالفانكشن  دي  لكل اطفالي   عشان  يستخدموها
   return (

@@ -69,7 +69,7 @@ export default function Products() {
 
   // ونجيب البروداكتس  الي   اتسيفت عندي  وامش ي عليها  بفلتر    لو البروداكت ال ي هو بيعدي   عليه   بنفس  الاسم   احفظه الفاليو دي  الي  اسمها   فلتر  بروداكت 
   const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchQuery.toLowerCase())
+    product.category.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
